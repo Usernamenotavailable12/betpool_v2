@@ -93,10 +93,11 @@
         display: inline-block;
         transition: 0.3s;
         cursor: pointer;
+        border: none;
       }
 
       .bp-btn:hover {
-        background-color: #e63aad;
+        background-color: #7e0e59;
       }
 
       .bp-captain-img {
@@ -415,6 +416,7 @@
                 <h3>${node.name}</h3>
                 <p>Max Win: ₾${node.stats.maxWinAmount}</p>
                 <p>Sessions: ${node.stats.numberOfFinishedSessions}</p>
+                <div class="card-bg" style="background-image: url(${node.imageRef}); opacity:.03;"></div>
               `;
 
             const detailsBtn = document.createElement("button");
