@@ -322,15 +322,17 @@
                   brandId: "ab"
                   status: [PENDING, READY]
                   visibility: PUBLIC
-                  first: 4
+                  first: 10
                 ) {
                   edges {
                     node {
                       id
+                      syndicateSessionId
                       name
                       poolAmount
                       syndicate {
                         name
+                        slug
                       }
                     }
                   }
@@ -354,7 +356,8 @@
                 <h3>${node.name}</h3>
                 <p>Captain: ${node.syndicate.name}</p>
                 <p>Pool: ₾${node.poolAmount}</p>
-                <button class="bp-btn" onclick="betpoolWidgetInstance.openSessionModal('${node.id}', '${node.name}', '${node.syndicate.name}', '${node.poolAmount}')">Join Session</button>
+                <a class="bp-btn" href="syndicate-session/${node.syndicate.slug}/${node.syndicateSessionId}">Join Session</a>
+
               `;
             container.appendChild(card);
           });
@@ -363,7 +366,18 @@
         async loadLeaderboard() {
           const query = `
               query SyndicateConnection {
-                syndicateConnection(brandId: "ab") {
+                syndicateConnection(
+                  brandId: "ab"
+                  syndicateIds: [
+                    "d75347df2054c066af7cbdeecd82bc464b8882f3"
+                    "577c95750b9919ed15ab3c18b8f7ae1d5ffad0a7"
+                    "ef2338dd47ed9640e722deec1af0b52b1060b4f7"
+                    "564dfd815b8860d125c7ace5d57667a1db264c7a"
+                    "5e6b16ee187cab1d552afbc725aa15cecdf22cbe"
+                    "fcb426d245da0d0d312f594624c0c54a4ea3f965"
+                    "e1e4be1349a5a95d75b8279516ccabbc31847c5e"
+                  ]
+                ) {
                   edges {
                     node {
                       name
