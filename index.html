@@ -356,8 +356,7 @@
                 <h3>${node.name}</h3>
                 <p>Captain: ${node.syndicate.name}</p>
                 <p>Pool: ₾${node.poolAmount}</p>
-                <a class="bp-btn" href="syndicate-session/${node.syndicate.slug}/${node.syndicateSessionId}">Join Session</a>
-
+                <button class="bp-btn" onclick="TMA.navigate('SYNDICATE_SESSION', {syndicateSlug: '${node.syndicate.slug}', syndicateSessionId: '${node.syndicateSessionId}'})">Join Session</button>
               `;
             container.appendChild(card);
           });
