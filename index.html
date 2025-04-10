@@ -129,49 +129,49 @@
   <body>
     <div class="bp-container">
       <section class="bp-section">
-        <h2 data-i18n="overviewTitle">🎯 Betpool Overview</h2>
+        <h2 translate-text="overviewTitle">🎯 Betpool Overview</h2>
         <div class="bp-grid">
           <div class="bp-card">
-            <h3 data-i18n="createSessionTitle">Create a Session</h3>
-            <p data-i18n="createSessionDesc">
+            <h3 translate-text="createSessionTitle">Create a Session</h3>
+            <p translate-text="createSessionDesc">
               Become a captain. Choose between Slots or Sportsbook and invite others to join your betting session.
             </p>
-            <a class="bp-btn" data-i18n="createSessionBtn"
+            <a class="bp-btn" translate-text="createSessionBtn"
               onclick="TMA.execute('OPEN_SYNDICATE_SESSION_CREATE_OVERLAY')">
               Create Session
             </a>
           </div>
           <div class="bp-card">
-            <h3 data-i18n="joinSessionTitle">Join a Session</h3>
-            <p data-i18n="joinSessionDesc">
+            <h3 translate-text="joinSessionTitle">Join a Session</h3>
+            <p translate-text="joinSessionDesc">
               Contribute money into an open session and let a captain play for everyone. Profits are split equally.
             </p>
-            <a class="bp-btn" data-i18n="joinSessionBtn" onclick="TMA.navigate('SYNDICATE_SESSIONS')">Browse Sessions</a>
+            <a class="bp-btn" translate-text="joinSessionBtn" onclick="TMA.navigate('SYNDICATE_SESSIONS')">Browse Sessions</a>
           </div>
         </div>
       </section>
 
       <section class="bp-section">
-        <h2 data-i18n="captainProfileTitle">🧑 Captain Profile</h2>
+        <h2 translate-text="captainProfileTitle">🧑 Captain Profile</h2>
         <div class="bp-grid" id="captain-profile"></div>
       </section>
 
       <section class="bp-section">
-        <h2 data-i18n="liveSessionsTitle">📺 Live Sessions</h2>
+        <h2 translate-text="liveSessionsTitle">📺 Live Sessions</h2>
         <div class="bp-grid" id="live-sessions"></div>
       </section>
 
       <section class="bp-section">
-        <h2 data-i18n="leaderboardTitle">📈 Top Captains Leaderboard</h2>
+        <h2 translate-text="leaderboardTitle">📈 Top Captains Leaderboard</h2>
         <div class="bp-grid" id="leaderboard"></div>
       </section>
 
       <section class="bp-section">
-        <h2 data-i18n="betslipsTitle">🧾 Syndicate Betslips</h2>
+        <h2 translate-text="betslipsTitle">🧾 Syndicate Betslips</h2>
         <div style="margin-bottom: 1rem">
-          <button class="bp-btn" data-i18n="openBtn" onclick="betpoolWidgetInstance.loadBetslips('OPEN')">OPEN</button>
-          <button class="bp-btn" data-i18n="wonBtn" onclick="betpoolWidgetInstance.loadBetslips('WON')">WON</button>
-          <button class="bp-btn" data-i18n="lostBtn" onclick="betpoolWidgetInstance.loadBetslips('LOST')">LOST</button>
+          <button class="bp-btn" translate-text="openBtn" onclick="betpoolWidgetInstance.loadBetslips('OPEN')">OPEN</button>
+          <button class="bp-btn" translate-text="wonBtn" onclick="betpoolWidgetInstance.loadBetslips('WON')">WON</button>
+          <button class="bp-btn" translate-text="lostBtn" onclick="betpoolWidgetInstance.loadBetslips('LOST')">LOST</button>
         </div>
         <div class="bp-grid" id="betslip-list"></div>
       </section>
@@ -179,26 +179,25 @@
       <!-- Session Modal -->
       <dialog id="session-modal" class="bp-dialog">
         <form method="dialog">
-          <h3 id="modal-session-name" data-i18n="modalSessionName" style="color: var(--bp-accent); margin-bottom: 0.5rem"></h3>
+          <h3 id="modal-session-name" translate-text="modalSessionName" style="color: var(--bp-accent); margin-bottom: 0.5rem"></h3>
           <p>
-            <strong data-i18n="modalCaptainLabel">Captain:</strong>
+            <strong translate-text="modalCaptainLabel">Captain:</strong>
             <span id="modal-session-captain"></span>
           </p>
           <p>
-            <strong data-i18n="modalPoolLabel">Pool:</strong>
+            <strong translate-text="modalPoolLabel">Pool:</strong>
             <span id="modal-session-pool"></span>
           </p>
-          <p data-i18n="modalSessionDetails">
+          <p translate-text="modalSessionDetails">
             <em>More session details coming soon...</em>
           </p>
-          <button class="bp-btn" data-i18n="modalCloseBtn" style="margin-top: 1rem">Close</button>
+          <button class="bp-btn" translate-text="modalCloseBtn" style="margin-top: 1rem">Close</button>
         </form>
       </dialog>
     </div>
 
     <!-- Translations Script -->
     <script>
-      // Global translations object with extra keys for dynamic texts.
       window.translations = {
         overviewTitle: {
           en: "🎯 Betpool Overview",
@@ -243,19 +242,19 @@
           tr: "Oturumlara Gözat"
         },
         captainProfileTitle: {
-          en: "🧑 Captain Profile",
+          en: "Captain Profile",
           ka: "კაპიტანის პროფილი",
           ru: "Профиль капитана",
           tr: "Kaptan Profili"
         },
         liveSessionsTitle: {
-          en: "📺 Live Sessions",
+          en: "Live Sessions",
           ka: "ცხოვრალი სესიები",
           ru: "Живые сессии",
           tr: "Canlı Oturumlar"
         },
         leaderboardTitle: {
-          en: "📈 Top Captains Leaderboard",
+          en: "Top Captains Leaderboard",
           ka: "თოპ კაპიტანების ლიდერბორდი",
           ru: "Топ капитанов",
           tr: "En İyi Kaptanlar Lider Tablosu"
@@ -384,8 +383,8 @@
 
       document.addEventListener("DOMContentLoaded", () => {
         let lang = document.documentElement.lang || "en";
-        document.querySelectorAll("[data-i18n]").forEach((el) => {
-          const key = el.getAttribute("data-i18n");
+        document.querySelectorAll("[translate-text]").forEach((el) => {
+          const key = el.getAttribute("translate-text");
           if (window.translations[key]) {
             el.textContent = window.translations[key][lang] || window.translations[key].en;
           }
@@ -393,7 +392,6 @@
       });
     </script>
 
-    <!-- Main Script -->
     <script>
       class BetpoolWidget {
         constructor() {
@@ -683,20 +681,19 @@
             <dialog id="captain-modal" class="bp-dialog">
               <form method="dialog">
                 <img id="modal-captain-img" src="" alt="" class="bp-captain-img" />
-                <h3 id="modal-captain-name" data-i18n="modalCaptainModalTitle" style="color: var(--bp-accent);"></h3>
-                <p><strong data-i18n="modalMaxWinLabel">Max Win:</strong> ₾<span id="modal-max-win"></span></p>
-                <p><strong data-i18n="modalTotalPoolLabel">Total Pool:</strong> ₾<span id="modal-total-pool"></span></p>
-                <p><strong data-i18n="modalTotalResultLabel">Total Result:</strong> ₾<span id="modal-total-result"></span></p>
-                <p><strong data-i18n="modalFinishedLabel">Finished Sessions:</strong> <span id="modal-finished"></span></p>
-                <button class="bp-btn" data-i18n="modalCloseBtn" style="margin-top: 1rem;">Close</button>
+                <h3 id="modal-captain-name" translate-text="modalCaptainModalTitle" style="color: var(--bp-accent);"></h3>
+                <p><strong translate-text="modalMaxWinLabel">Max Win:</strong> ₾<span id="modal-max-win"></span></p>
+                <p><strong translate-text="modalTotalPoolLabel">Total Pool:</strong> ₾<span id="modal-total-pool"></span></p>
+                <p><strong translate-text="modalTotalResultLabel">Total Result:</strong> ₾<span id="modal-total-result"></span></p>
+                <p><strong translate-text="modalFinishedLabel">Finished Sessions:</strong> <span id="modal-finished"></span></p>
+                <button class="bp-btn" translate-text="modalCloseBtn" style="margin-top: 1rem;">Close</button>
               </form>
             </dialog>
           `;
           document.body.insertAdjacentHTML("beforeend", html);
-          // Update the newly inserted captain modal's texts
           let lang = document.documentElement.lang || "en";
-          document.querySelectorAll("#captain-modal [data-i18n]").forEach((el) => {
-            const key = el.getAttribute("data-i18n");
+          document.querySelectorAll("#captain-modal [translate-text]").forEach((el) => {
+            const key = el.getAttribute("translate-text");
             el.textContent = window.translations[key][lang] || window.translations[key].en;
           });
         }
