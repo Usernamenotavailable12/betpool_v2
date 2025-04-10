@@ -31,7 +31,9 @@
         margin-bottom: 1rem;
         font-family: "Noto Sans Ambassadori";
       }
-      .bp-section { margin-bottom: 4rem; }
+      .bp-section {
+        margin-bottom: 4rem;
+      }
       .bp-grid {
         display: grid;
         grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
@@ -60,7 +62,10 @@
         z-index: 0;
       }
       /* Ensure content appears above the background layer */
-      .bp-card > * { position: relative; z-index: 1; }
+      .bp-card > * {
+        position: relative;
+        z-index: 1;
+      }
       .bp-card h3 {
         margin-top: 0;
         color: var(--bp-highlight);
@@ -115,7 +120,10 @@
         backdrop-filter: blur(4px);
         -webkit-backdrop-filter: blur(4px);
       }
-      #betslip-load-more { width: 100%; margin-top: 20px; }
+      #betslip-load-more {
+        width: 100%;
+        margin-top: 20px;
+      }
     </style>
   </head>
   <body>
@@ -128,7 +136,10 @@
             <p data-i18n="createSessionDesc">
               Become a captain. Choose between Slots or Sportsbook and invite others to join your betting session.
             </p>
-            <a class="bp-btn" data-i18n="createSessionBtn" onclick="TMA.execute('OPEN_SYNDICATE_SESSION_CREATE_OVERLAY')">Create Session</a>
+            <a class="bp-btn" data-i18n="createSessionBtn"
+              onclick="TMA.execute('OPEN_SYNDICATE_SESSION_CREATE_OVERLAY')">
+              Create Session
+            </a>
           </div>
           <div class="bp-card">
             <h3 data-i18n="joinSessionTitle">Join a Session</h3>
@@ -165,6 +176,7 @@
         <div class="bp-grid" id="betslip-list"></div>
       </section>
 
+      <!-- Session Modal -->
       <dialog id="session-modal" class="bp-dialog">
         <form method="dialog">
           <h3 id="modal-session-name" data-i18n="modalSessionName" style="color: var(--bp-accent); margin-bottom: 0.5rem"></h3>
@@ -231,25 +243,25 @@
           tr: "Oturumlara Gözat"
         },
         captainProfileTitle: {
-          en: "Captain Profile",
+          en: "🧑 Captain Profile",
           ka: "კაპიტანის პროფილი",
           ru: "Профиль капитана",
           tr: "Kaptan Profili"
         },
         liveSessionsTitle: {
-          en: "Live Sessions",
-          ka: "ცოცხალი სესიები",
+          en: "📺 Live Sessions",
+          ka: "ცხოვრალი სესიები",
           ru: "Живые сессии",
           tr: "Canlı Oturumlar"
         },
         leaderboardTitle: {
-          en: "Top Captains Leaderboard",
+          en: "📈 Top Captains Leaderboard",
           ka: "თოპ კაპიტანების ლიდერბორდი",
           ru: "Топ капитанов",
           tr: "En İyi Kaptanlar Lider Tablosu"
         },
         betslipsTitle: {
-          en: "Syndicate Betslips",
+          en: "🧾 Syndicate Betslips",
           ka: "სინდიკატის ბეთსლიპები",
           ru: "Бетслиты синдиката",
           tr: "Sendika Bahis Kuponları"
@@ -278,7 +290,12 @@
           ru: "Закрыть",
           tr: "Kapat"
         },
-        modalSessionName: { en: "", ka: "", ru: "", tr: "" },
+        modalSessionName: {
+          en: "",
+          ka: "",
+          ru: "",
+          tr: ""
+        },
         modalSessionDetails: {
           en: "More session details coming soon...",
           ka: "მეტის სესიის დეტალები მალე",
@@ -333,7 +350,6 @@
           ru: "Детали",
           tr: "Detaylar"
         },
-        // New keys for dynamic betslip texts:
         userLabel: {
           en: "User:",
           ka: "მომხმარებელი:",
@@ -360,13 +376,12 @@
         },
         loadMoreBtn: {
           en: "Load More",
-          ka: "მეტი",
+          ka: "კიდევ მეტი",
           ru: "Загрузить ещё",
           tr: "Daha Fazla Yükle"
         }
       };
 
-      // On DOMContentLoaded, update HTML elements using data-i18n attributes.
       document.addEventListener("DOMContentLoaded", () => {
         let lang = document.documentElement.lang || "en";
         document.querySelectorAll("[data-i18n]").forEach((el) => {
@@ -441,12 +456,10 @@
           const { data } = await this.fetchGraphQL(query);
           const profile = data?.syndicateConnection?.edges?.[0]?.node;
           const container = document.getElementById("captain-profile");
-
           if (!profile) {
             container.innerHTML = "<p>No profile found.</p>";
             return;
           }
-
           container.innerHTML = `
             <div class="bp-card">
               <div class="card-bg" style="background-image: url(${profile.imageRef});"></div>
@@ -485,14 +498,10 @@
           const { data } = await this.fetchGraphQL(query);
           const sessions = data?.syndicateSessionConnection?.edges || [];
           const container = document.getElementById("live-sessions");
-
           if (!sessions.length) {
             container.innerHTML = "<p>No live sessions found.</p>";
             return;
           }
-
-          const lang = document.documentElement.lang || "en";
-
           sessions.forEach(({ node }) => {
             const card = document.createElement("div");
             card.className = "bp-card";
@@ -502,7 +511,7 @@
               <p>Captain: ${node.syndicate.name}</p>
               <p>Pool: ₾${node.poolAmount}</p>
               <button class="bp-btn" onclick="TMA.navigate('SYNDICATE_SESSION', {syndicateSlug: '${node.syndicate.slug}', syndicateSessionId: '${node.syndicateSessionId}'})">
-                ${window.translations.joinSessionBtn[lang] || window.translations.joinSessionBtn.en}
+                ${window.translations.joinSessionBtn[document.documentElement.lang] || window.translations.joinSessionBtn.en}
               </button>
             `;
             container.appendChild(card);
@@ -542,25 +551,23 @@
           const { data } = await this.fetchGraphQL(query);
           const container = document.getElementById("leaderboard");
           const edges = data?.syndicateConnection?.edges || [];
-
           if (!edges.length) {
             container.innerHTML = "<p>No captains found.</p>";
             return;
           }
-
           container.innerHTML = "";
           const valid = edges
-            .filter((e) =>
-              e.node.stats &&
-              e.node.stats.totalPoolAmount &&
-              e.node.stats.totalResultAmount
+            .filter(
+              (e) =>
+                e.node.stats &&
+                e.node.stats.totalPoolAmount &&
+                e.node.stats.totalResultAmount
             )
             .sort(
               (a, b) =>
                 parseFloat(b.node.stats.maxWinAmount || 0) -
                 parseFloat(a.node.stats.maxWinAmount || 0)
             );
-
           valid.forEach(({ node }) => {
             const lang = document.documentElement.lang || "en";
             const card = document.createElement("div");
@@ -574,7 +581,8 @@
             `;
             const detailsBtn = document.createElement("button");
             detailsBtn.className = "bp-btn";
-            detailsBtn.textContent = window.translations.detailsBtn[lang] || window.translations.detailsBtn.en;
+            detailsBtn.textContent =
+              window.translations.detailsBtn[lang] || window.translations.detailsBtn.en;
             detailsBtn.onclick = () =>
               this.openCaptainModal(node.name, node.imageRef, node.stats);
             card.appendChild(detailsBtn);
@@ -585,7 +593,6 @@
         async loadBetslips(status = "WON", append = false) {
           const container = document.getElementById("betslip-list");
           const lang = document.documentElement.lang || "en";
-
           if (!append || this.betslipsStatus !== status) {
             this.betslipsStatus = status;
             this.currentBetslipIndex = 0;
@@ -607,11 +614,9 @@
               existingBtn.remove();
             }
           }
-
           const start = this.currentBetslipIndex;
           const end = start + this.betslipsLimit;
           const slice = this.betslipsData.slice(start, end);
-
           slice.forEach(({ node }) => {
             const possibleWin = (parseFloat(node.stake) * parseFloat(node.odds)).toFixed(2);
             const betslipCard = document.createElement("div");
@@ -622,16 +627,16 @@
               <p><strong>${window.translations.stakeLabel[lang] || window.translations.stakeLabel.en}</strong> ₾${node.stake}</p>
               <p><strong>${window.translations.oddsLabel[lang] || window.translations.oddsLabel.en}</strong> ${node.odds}</p>
               <p><strong>${window.translations.possibleWinLabel[lang] || window.translations.possibleWinLabel.en}</strong> ₾${possibleWin}</p>
-              <ul style="font-size: 0.9rem; color: var(--bp-muted); padding-left: 1rem;">${node.events.map(event => {
-                const outcomes = event.markets.flatMap(m => m.outcomes.map(o => o.name)).join(", ");
-                return `<li><strong>${event.eventName}</strong>: ${outcomes}</li>`;
-              }).join("")}</ul>
+              <ul style="font-size: 0.9rem; color: var(--bp-muted); padding-left: 1rem;">
+                ${node.events.map(event => {
+                  const outcomes = event.markets.flatMap(m => m.outcomes.map(o => o.name)).join(", ");
+                  return `<li><strong>${event.eventName}</strong>: ${outcomes}</li>`;
+                }).join("")}
+              </ul>
             `;
             container.appendChild(betslipCard);
           });
-
           this.currentBetslipIndex += this.betslipsLimit;
-
           if (this.currentBetslipIndex < this.betslipsData.length) {
             let loadMoreBtn = document.getElementById("betslip-load-more");
             if (!loadMoreBtn) {
@@ -650,7 +655,6 @@
               existingBtn.remove();
             }
           }
-
           if (this.betslipsData.length === 0 && !append) {
             container.innerHTML = "<p>No betslips found.</p>";
           }
@@ -689,6 +693,12 @@
             </dialog>
           `;
           document.body.insertAdjacentHTML("beforeend", html);
+          // Update the newly inserted captain modal's texts
+          let lang = document.documentElement.lang || "en";
+          document.querySelectorAll("#captain-modal [data-i18n]").forEach((el) => {
+            const key = el.getAttribute("data-i18n");
+            el.textContent = window.translations[key][lang] || window.translations[key].en;
+          });
         }
       }
 
