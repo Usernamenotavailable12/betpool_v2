@@ -235,11 +235,11 @@
         this.currentBetslipIndex = 0;
         this.betslipsLimit = 6;
         this.betslipsStatus = "WON";
-        this.translations = {
+        this.translations = this.translations = {
           overviewTitle: {
             en: "🎯 Betpool Overview",
             ka: "🎯 Betpool-ს მიმოხილვა",
-            ru: "🎯 Обзор Бетпула",
+            ru: "🎯 Предпросмотр Бетпула",
             tr: "🎯 Betpool Genel Bakış",
           },
           createSessionTitle: {
@@ -250,8 +250,8 @@
           },
           createSessionDesc: {
             en: "Become a captain. Choose between Slots or Sportsbook and invite others to join your betting session.",
-            ka: "გახდე კაპიტანი. აირჩიე Slots ან Sportsbook და მიიწვიე სხვები შენს ბეთის სესიაში.",
-            ru: "Станьте капитаном. Выбирайте между Slots и Sportsbook и приглашайте других присоединиться к вашей сессии.",
+            ka: "გახდი კაპიტანი, შექმენი სესიები და მოიგე მეგობრებთან ერთად.",
+            ru: "Станьте капитаном. Выбирайте Slots или Sportsbook и приглашайте других присоединиться к вашей сессии.",
             tr: "Kaptan olun. Slots veya Sportsbook arasından seçip diğerlerini bahis oturumunuza davet edin.",
           },
           createSessionBtn: {
@@ -262,20 +262,20 @@
           },
           joinSessionTitle: {
             en: "Join a Session",
-            ka: "სესიაში გაუერთდი",
+            ka: "სესიაში გაწევრიანება",
             ru: "Присоединиться к сессии",
             tr: "Oturuma Katıl",
           },
           joinSessionDesc: {
             en: "Contribute money into an open session and let a captain play for everyone. Profits are split equally.",
-            ka: "გაწევრე ფული გახსნილ სესიაში და დატოვე კაპიტანს ყველა vertreten.",
+            ka: "შეიტანე ფული ღია სესიაში და მოიგე კაპიტანთან ერთად. მოგება იყოფა თანაბრად.",
             ru: "Внесите деньги в открытую сессию и позвольте капитану играть за всех. Прибыль распределяется поровну.",
             tr: "Açık bir oturuma para katın ve kaptanın herkes için oynamasına izin verin. Kar eşit bölünür.",
           },
           joinSessionBtn: {
             en: "Browse Sessions",
             ka: "სესიების ნახვა",
-            ru: "Просмотреть сессии",
+            ru: "Посмотреть сесии",
             tr: "Oturumlara Gözat",
           },
           captainProfileTitle: {
@@ -286,30 +286,30 @@
           },
           liveSessionsTitle: {
             en: "Live Sessions",
-            ka: "ცხოვრალი სესიები",
-            ru: "Живые сессии",
+            ka: "Live სესიები",
+            ru: "Live сессии",
             tr: "Canlı Oturumlar",
           },
           leaderboardTitle: {
             en: "Top Captains Leaderboard",
-            ka: "თოპ კაპიტანის ლიდერბორდი",
+            ka: "ტოპ კაპიტანთა ლიდერბორდი",
             ru: "Топ капитанов",
             tr: "En İyi Kaptanlar Lider Tablosu",
           },
           betslipsTitle: {
             en: "Syndicate Betslips",
             ka: "სინდიკატის ბეთსლიპები",
-            ru: "Бетслиты синдиката",
+            ru: "Синдикаты Бетслипов",
             tr: "Sendika Bahis Kuponları",
           },
-          openBtn: { en: "OPEN", ka: "ღია", ru: "Открыто", tr: "AÇIK" },
-          wonBtn: { en: "WON", ka: "მოგებული", ru: "Выиграл", tr: "KAZANDI" },
-          lostBtn: { en: "LOST", ka: "წაგებული", ru: "Проиграл", tr: "KAYBETTİ" },
+          openBtn: { en: "OPEN", ka: "ღია", ru: "Открытый", tr: "AÇIK" },
+          wonBtn: { en: "WON", ka: "მოგებული", ru: "Выгранный", tr: "KAZANDI" },
+          lostBtn: { en: "LOST", ka: "წაგებული", ru: "Проигравшый", tr: "KAYBETTİ" },
           modalCloseBtn: { en: "Close", ka: "დახურვა", ru: "Закрыть", tr: "Kapat" },
           modalSessionName: { en: "", ka: "", ru: "", tr: "" },
           modalSessionDetails: {
             en: "More session details coming soon...",
-            ka: "მეტის სესიის დეტალები მალე",
+            ka: "მეტის ჩატვირთვას სესიის დეტალები მალე",
             ru: "Подробнее о сессии скоро",
             tr: "Daha fazla oturum detayı yakında",
           },
@@ -322,7 +322,7 @@
           modalPoolLabel: { en: "Pool:", ka: "პული:", ru: "Пул:", tr: "Havuz:" },
           modalMaxWinLabel: {
             en: "Max Win:",
-            ka: "მაქსიმალური გამარჯვება:",
+            ka: "მაქსიმალური მოგება:",
             ru: "Макс выигрыш:",
             tr: "Maksimum Kazanç:",
           },
@@ -362,7 +362,7 @@
             ru: "Пользователь:",
             tr: "Kullanıcı:",
           },
-          stakeLabel: { en: "Stake:", ka: "შევლ:", ru: "Ставка:", tr: "Bahis:" },
+          stakeLabel: { en: "Stake:", ka: "ფსონი:", ru: "Ставка:", tr: "Bahis:" },
           oddsLabel: {
             en: "Odds:",
             ka: "კოეფიციენტები:",
@@ -371,13 +371,13 @@
           },
           possibleWinLabel: {
             en: "Possible Win:",
-            ka: "შესაძლებელი გამარჯვება:",
+            ka: "შესაძლებელი მოგება:",
             ru: "Возможный выигрыш:",
             tr: "Olası Kazanç:",
           },
           loadMoreBtn: {
             en: "Load More",
-            ka: "მეტი",
+            ka: "მეტის ჩატვირთვა",
             ru: "Загрузить ещё",
             tr: "Daha Fazla Yükle",
           },
