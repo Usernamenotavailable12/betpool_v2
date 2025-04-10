@@ -1,683 +1,542 @@
 <!DOCTYPE html>
+
+
+<!-- ენის შეცვლა -->
 <html lang="ka">
-  <head>
-    <meta charset="UTF-8" />
-    <title>Betpool Overview</title>
-    <style>
-      body {
-        margin: 0;
-        padding: 0;
-      }
-      :root {
-        --bp-bg: #1f051d;
-        --bp-card: #1a1a229f;
-        --bp-accent: #cf167d;
-        --bp-highlight: #ff59af;
-        --bp-highlight-2: #ff59af29;
-        --bp-text: #ffffff;
-        --bp-muted: #888888;
-        --bp-shadow: rgba(0, 0, 0, 0.4);
-      }
-      .bp-container {
-        margin: 0;
-        font-family: "Segoe UI", sans-serif;
-        background-color: var(--bp-bg);
-        color: var(--bp-text);
-        padding: 2rem;
-      }
-      .bp-container h2 {
-        font-size: 2rem;
-        color: var(--bp-accent);
-        margin-bottom: 1rem;
-        font-family: "Noto Sans Ambassadori";
-      }
-      .bp-section {
-        margin-bottom: 4rem;
-      }
-      .bp-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-        gap: 1.5rem;
-      }
-      .bp-card {
-        position: relative;
-        border-radius: 1.25rem;
-        padding: 1.75rem;
-        box-shadow: 0 10px 30px var(--bp-shadow);
-        overflow: hidden;
-        border: solid 1px var(--bp-highlight-2);
-        background-color: var(--bp-card);
-      }
-      .card-bg {
-        position: absolute !important;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background-size: cover;
-        background-position: center;
-        background-attachment: fixed;
-        filter: blur(3px) brightness(60%);
-        opacity: 0.1;
-        z-index: 0;
-      }
-      /* Ensure content appears above the background layer */
-      .bp-card > * {
-        position: relative;
-        z-index: 1;
-      }
-      .bp-card h3 {
-        margin-top: 0;
-        color: var(--bp-highlight);
-        font-size: 1.3rem;
-        font-family: "Noto Sans Ambassadori";
-      }
-      .bp-card p {
-        color: var(--bp-muted);
-        font-size: 0.95rem;
-        margin-bottom: 1rem;
-        font-family: "Noto Sans Ambassadori";
-      }
-      .bp-btn {
-        background-color: var(--bp-accent);
-        color: #ffffff;
-        padding: 0.75rem 1.25rem;
-        border-radius: 8px;
-        text-decoration: none;
-        font-weight: 600;
-        display: inline-block;
-        transition: 0.3s;
-        cursor: pointer;
-        border: none;
-      }
-      .bp-btn:hover { background-color: #7e0e59; }
-      .bp-captain-img {
-        width: 100%;
-        height: 140px;
-        object-fit: cover;
-        border-radius: 1rem;
-        margin-bottom: 1rem;
-      }
-      .bp-session-type {
-        font-size: 0.8rem;
-        background: var(--bp-highlight);
-        color: white;
-        display: inline-block;
-        padding: 0.25rem 0.5rem;
-        border-radius: 0.5rem;
-        margin-bottom: 0.75rem;
-      }
-      .bp-dialog {
-        border: none;
-        border-radius: 1rem;
-        background: var(--bp-card);
-        color: white;
-        width: 90%;
-        max-width: 400px;
-      }
-      .bp-dialog::backdrop {
-        background-color: rgba(0, 0, 0, 0.8);
-        backdrop-filter: blur(4px);
-        -webkit-backdrop-filter: blur(4px);
-      }
-      #betslip-load-more {
-        width: 100%;
-        margin-top: 20px;
-      }
-    </style>
-  </head>
-  <body>
-    <div class="bp-container">
-      <section class="bp-section">
-        <h2 translate-text="overviewTitle">🎯 Betpool Overview</h2>
-        <div class="bp-grid">
-          <div class="bp-card">
-            <h3 translate-text="createSessionTitle">Create a Session</h3>
-            <p translate-text="createSessionDesc">
-              Become a captain. Choose between Slots or Sportsbook and invite others to join your betting session.
-            </p>
-            <a class="bp-btn" translate-text="createSessionBtn"
-              onclick="TMA.execute('OPEN_SYNDICATE_SESSION_CREATE_OVERLAY')">
-              Create Session
-            </a>
-          </div>
-          <div class="bp-card">
-            <h3 translate-text="joinSessionTitle">Join a Session</h3>
-            <p translate-text="joinSessionDesc">
-              Contribute money into an open session and let a captain play for everyone. Profits are split equally.
-            </p>
-            <a class="bp-btn" translate-text="joinSessionBtn" onclick="TMA.navigate('SYNDICATE_SESSIONS')">Browse Sessions</a>
-          </div>
+<!-- ენის შეცვლა -->
+
+
+<head>
+  <meta charset="UTF-8" />
+  <title>Betpool Overview</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --bp-bg: #1f051d;
+      --bp-card: #1a1a229f;
+      --bp-accent: #cf167d;
+      --bp-highlight: #ff59af;
+      --bp-highlight-2: #ff59af29;
+      --bp-text: #ffffff;
+      --bp-muted: #888888;
+      --bp-shadow: rgba(0, 0, 0, 0.4);
+    }
+
+    .bp-container {
+      margin: 0;
+      font-family: "Segoe UI", sans-serif;
+      background-color: var(--bp-bg);
+      color: var(--bp-text);
+      padding: 2rem;
+    }
+
+    .bp-container h2 {
+      font-size: 2rem;
+      color: var(--bp-accent);
+      margin-bottom: 1rem;
+      font-family: "Noto Sans Ambassadori";
+    }
+
+    .bp-section {
+      margin-bottom: 4rem;
+    }
+
+    .bp-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .bp-card {
+      position: relative;
+      border-radius: 1.25rem;
+      padding: 1.75rem;
+      box-shadow: 0 10px 30px var(--bp-shadow);
+      overflow: hidden;
+      border: solid 1px var(--bp-highlight-2);
+      background-color: var(--bp-card);
+    }
+
+    .card-bg {
+      position: absolute !important;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+      filter: blur(3px) brightness(60%);
+      opacity: 0.1;
+      z-index: 0;
+    }
+
+    .bp-card>* {
+      position: relative;
+      z-index: 1;
+    }
+
+    .bp-card h3 {
+      margin-top: 0;
+      color: var(--bp-highlight);
+      font-size: 1.3rem;
+      font-family: "Noto Sans Ambassadori";
+    }
+
+    .bp-card p {
+      color: var(--bp-muted);
+      font-size: 0.95rem;
+      margin-bottom: 1rem;
+      font-family: "Noto Sans Ambassadori";
+    }
+
+    .bp-btn {
+      background-color: var(--bp-accent);
+      color: #ffffff;
+      padding: 0.75rem 1.25rem;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 600;
+      display: inline-block;
+      transition: 0.3s;
+      cursor: pointer;
+      border: none;
+    }
+
+    .bp-btn:hover {
+      background-color: #7e0e59;
+    }
+
+    .bp-captain-img {
+      width: 100%;
+      height: 140px;
+      object-fit: cover;
+      border-radius: 1rem;
+      margin-bottom: 1rem;
+    }
+
+    .bp-session-type {
+      font-size: 0.8rem;
+      background: var(--bp-highlight);
+      color: white;
+      display: inline-block;
+      padding: 0.25rem 0.5rem;
+      border-radius: 0.5rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .bp-dialog {
+      border: none;
+      border-radius: 1rem;
+      background: var(--bp-card);
+      color: white;
+      width: 90%;
+      max-width: 400px;
+    }
+
+    .bp-dialog::backdrop {
+      background-color: rgba(0, 0, 0, 0.8);
+      backdrop-filter: blur(4px);
+      -webkit-backdrop-filter: blur(4px);
+    }
+
+    #betslip-load-more {
+      width: 100%;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="bp-container">
+    <!-- Main sections -->
+    <section class="bp-section">
+      <h2 translate-text="overviewTitle">🎯 Betpool Overview</h2>
+      <div class="bp-grid">
+        <div class="bp-card">
+          <h3 translate-text="createSessionTitle">Create a Session</h3>
+          <p translate-text="createSessionDesc">
+            Become a captain. Choose between Slots or Sportsbook and invite others to join your betting session.
+          </p>
+          <a class="bp-btn" translate-text="createSessionBtn"
+            onclick="TMA.execute('OPEN_SYNDICATE_SESSION_CREATE_OVERLAY')">
+            Create Session
+          </a>
         </div>
-      </section>
-
-      <section class="bp-section">
-        <h2 translate-text="captainProfileTitle">🧑 Captain Profile</h2>
-        <div class="bp-grid" id="captain-profile"></div>
-      </section>
-
-      <section class="bp-section">
-        <h2 translate-text="liveSessionsTitle">📺 Live Sessions</h2>
-        <div class="bp-grid" id="live-sessions"></div>
-      </section>
-
-      <section class="bp-section">
-        <h2 translate-text="leaderboardTitle">📈 Top Captains Leaderboard</h2>
-        <div class="bp-grid" id="leaderboard"></div>
-      </section>
-
-      <section class="bp-section">
-        <h2 translate-text="betslipsTitle">🧾 Syndicate Betslips</h2>
-        <div style="margin-bottom: 1rem">
-          <button class="bp-btn" translate-text="openBtn" onclick="betpoolWidgetInstance.loadBetslips('OPEN')">OPEN</button>
-          <button class="bp-btn" translate-text="wonBtn" onclick="betpoolWidgetInstance.loadBetslips('WON')">WON</button>
-          <button class="bp-btn" translate-text="lostBtn" onclick="betpoolWidgetInstance.loadBetslips('LOST')">LOST</button>
+        <div class="bp-card">
+          <h3 translate-text="joinSessionTitle">Join a Session</h3>
+          <p translate-text="joinSessionDesc">
+            Contribute money into an open session and let a captain play for everyone. Profits are split equally.
+          </p>
+          <a class="bp-btn" translate-text="joinSessionBtn" onclick="TMA.navigate('SYNDICATE_SESSIONS')">Browse
+            Sessions</a>
         </div>
-        <div class="bp-grid" id="betslip-list"></div>
-      </section>
+      </div>
+    </section>
 
-      <!-- Session Modal -->
-      <dialog id="session-modal" class="bp-dialog">
-        <form method="dialog">
-          <h3 id="modal-session-name" translate-text="modalSessionName" style="color: var(--bp-accent); margin-bottom: 0.5rem"></h3>
-          <p>
-            <strong translate-text="modalCaptainLabel">Captain:</strong>
-            <span id="modal-session-captain"></span>
-          </p>
-          <p>
-            <strong translate-text="modalPoolLabel">Pool:</strong>
-            <span id="modal-session-pool"></span>
-          </p>
-          <p translate-text="modalSessionDetails">
-            <em>More session details coming soon...</em>
-          </p>
-          <button class="bp-btn" translate-text="modalCloseBtn" style="margin-top: 1rem">Close</button>
-        </form>
-      </dialog>
-    </div>
+    <section class="bp-section">
+      <h2 translate-text="captainProfileTitle">🧑 Captain Profile</h2>
+      <div class="bp-grid" id="captain-profile"></div>
+    </section>
 
-    <!-- Translations Script -->
-    <script>
-      window.translations = {
-        overviewTitle: {
-          en: "🎯 Betpool Overview",
-          ka: "🎯 Betpool-ს მიმოხილვა",
-          ru: "🎯 Обзор Бетпула",
-          tr: "🎯 Betpool Genel Bakış"
-        },
-        createSessionTitle: {
-          en: "Create a Session",
-          ka: "სესიის შექმნა",
-          ru: "Создать сессию",
-          tr: "Oturum Oluştur"
-        },
-        createSessionDesc: {
-          en: "Become a captain. Choose between Slots or Sportsbook and invite others to join your betting session.",
-          ka: "გახდე კაპიტანი. აირჩიე Slots ან Sportsbook და მიიწვიე სხვები შენს ბეთის სესიაში.",
-          ru: "Станьте капитаном. Выбирайте между Slots и Sportsbook и приглашайте других присоединиться к вашей сессии.",
-          tr: "Kaptan olun. Slots veya Sportsbook arasından seçip diğerlerini bahis oturumunuza davet edin."
-        },
-        createSessionBtn: {
-          en: "Create Session",
-          ka: "სესიის შექმნა",
-          ru: "Создать сессию",
-          tr: "Oturum Oluştur"
-        },
-        joinSessionTitle: {
-          en: "Join a Session",
-          ka: "სესიაში გაუერთდი",
-          ru: "Присоединиться к сессии",
-          tr: "Oturuma Katıl"
-        },
-        joinSessionDesc: {
-          en: "Contribute money into an open session and let a captain play for everyone. Profits are split equally.",
-          ka: "გაწევრე ფული გახსნილ სესიაში და დატოვე კაპიტანს ყველა vertreten.",
-          ru: "Внесите деньги в открытую сессию и позвольте капитану играть за всех. Прибыль распределяется поровну.",
-          tr: "Açık bir oturuma para katın ve kaptanın herkes için oynamasına izin verin. Kar eşit bölünür."
-        },
-        joinSessionBtn: {
-          en: "Browse Sessions",
-          ka: "სესიების ნახვა",
-          ru: "Просмотреть сессии",
-          tr: "Oturumlara Gözat"
-        },
-        captainProfileTitle: {
-          en: "Captain Profile",
-          ka: "კაპიტანის პროფილი",
-          ru: "Профиль капитана",
-          tr: "Kaptan Profili"
-        },
-        liveSessionsTitle: {
-          en: "Live Sessions",
-          ka: "ცხოვრალი სესიები",
-          ru: "Живые сессии",
-          tr: "Canlı Oturumlar"
-        },
-        leaderboardTitle: {
-          en: "Top Captains Leaderboard",
-          ka: "თოპ კაპიტანების ლიდერბორდი",
-          ru: "Топ капитанов",
-          tr: "En İyi Kaptanlar Lider Tablosu"
-        },
-        betslipsTitle: {
-          en: "🧾 Syndicate Betslips",
-          ka: "სინდიკატის ბეთსლიპები",
-          ru: "Бетслиты синдиката",
-          tr: "Sendika Bahis Kuponları"
-        },
-        openBtn: {
-          en: "OPEN",
-          ka: "ღია",
-          ru: "Открыто",
-          tr: "AÇIK"
-        },
-        wonBtn: {
-          en: "WON",
-          ka: "მოგებული",
-          ru: "Выиграл",
-          tr: "KAZANDI"
-        },
-        lostBtn: {
-          en: "LOST",
-          ka: "წაგებული",
-          ru: "Проиграл",
-          tr: "KAYBETTİ"
-        },
-        modalCloseBtn: {
-          en: "Close",
-          ka: "დახურვა",
-          ru: "Закрыть",
-          tr: "Kapat"
-        },
-        modalSessionName: {
-          en: "",
-          ka: "",
-          ru: "",
-          tr: ""
-        },
-        modalSessionDetails: {
-          en: "More session details coming soon...",
-          ka: "მეტის სესიის დეტალები მალე",
-          ru: "Подробнее о сессии скоро",
-          tr: "Daha fazla oturum detayı yakında"
-        },
-        modalCaptainLabel: {
-          en: "Captain:",
-          ka: "კაპიტანი:",
-          ru: "Капитан:",
-          tr: "Kaptan:"
-        },
-        modalPoolLabel: {
-          en: "Pool:",
-          ka: "პული:",
-          ru: "Пул:",
-          tr: "Havuz:"
-        },
-        modalMaxWinLabel: {
-          en: "Max Win:",
-          ka: "მაქსიმალური გამარჯვება:",
-          ru: "Макс выигрыш:",
-          tr: "Maksimum Kazanç:"
-        },
-        modalTotalPoolLabel: {
-          en: "Total Pool:",
-          ka: "სულ პული:",
-          ru: "Общий пул:",
-          tr: "Toplam Havuz:"
-        },
-        modalTotalResultLabel: {
-          en: "Total Result:",
-          ka: "სულ შედეგი:",
-          ru: "Общий результат:",
-          tr: "Toplam Sonuç:"
-        },
-        modalFinishedLabel: {
-          en: "Finished Sessions:",
-          ka: "დასრულებული სესიები:",
-          ru: "Завершённые сессии:",
-          tr: "Bitmiş Oturumlar:"
-        },
-        modalCaptainModalTitle: {
-          en: "Captain Details",
-          ka: "კაპიტანის დეტალები",
-          ru: "Детали капитана",
-          tr: "Kaptan Detayları"
-        },
-        detailsBtn: {
-          en: "Details",
-          ka: "დეტალები",
-          ru: "Детали",
-          tr: "Detaylar"
-        },
-        userLabel: {
-          en: "User:",
-          ka: "მომხმარებელი:",
-          ru: "Пользователь:",
-          tr: "Kullanıcı:"
-        },
-        stakeLabel: {
-          en: "Stake:",
-          ka: "შევლ:",
-          ru: "Ставка:",
-          tr: "Bahis:"
-        },
-        oddsLabel: {
-          en: "Odds:",
-          ka: "კოეფიციენტები:",
-          ru: "Коэффициенты:",
-          tr: "Oranlar:"
-        },
-        possibleWinLabel: {
-          en: "Possible Win:",
-          ka: "შესაძლებელი გამარჯვება:",
-          ru: "Возможный выигрыш:",
-          tr: "Olası Kazanç:"
-        },
-        loadMoreBtn: {
-          en: "Load More",
-          ka: "კიდევ მეტი",
-          ru: "Загрузить ещё",
-          tr: "Daha Fazla Yükle"
-        }
-      };
+    <section class="bp-section">
+      <h2 translate-text="liveSessionsTitle">📺 Live Sessions</h2>
+      <div class="bp-grid" id="live-sessions"></div>
+    </section>
 
-      document.addEventListener("DOMContentLoaded", () => {
-        let lang = document.documentElement.lang || "en";
+    <section class="bp-section">
+      <h2 translate-text="leaderboardTitle">📈 Top Captains Leaderboard</h2>
+      <div class="bp-grid" id="leaderboard"></div>
+    </section>
+
+    <section class="bp-section">
+      <h2 translate-text="betslipsTitle">🧾 Syndicate Betslips</h2>
+      <div style="margin-bottom: 1rem">
+        <button class="bp-btn" translate-text="openBtn"
+          onclick="betpoolWidgetInstance.loadBetslips('OPEN')">OPEN</button>
+        <button class="bp-btn" translate-text="wonBtn" onclick="betpoolWidgetInstance.loadBetslips('WON')">WON</button>
+        <button class="bp-btn" translate-text="lostBtn"
+          onclick="betpoolWidgetInstance.loadBetslips('LOST')">LOST</button>
+      </div>
+      <div class="bp-grid" id="betslip-list"></div>
+    </section>
+
+    <!-- Session Modal -->
+    <dialog id="session-modal" class="bp-dialog">
+      <form method="dialog">
+        <h3 id="modal-session-name" translate-text="modalSessionName"
+          style="color: var(--bp-accent); margin-bottom: 0.5rem"></h3>
+        <p>
+          <strong translate-text="modalCaptainLabel">Captain:</strong>
+          <span id="modal-session-captain"></span>
+        </p>
+        <p>
+          <strong translate-text="modalPoolLabel">Pool:</strong>
+          <span id="modal-session-pool"></span>
+        </p>
+        <p translate-text="modalSessionDetails">
+          <em>More session details coming soon...</em>
+        </p>
+        <button class="bp-btn" translate-text="modalCloseBtn" style="margin-top: 1rem">Close</button>
+      </form>
+    </dialog>
+  </div>
+
+  <!-- Main Script -->
+  <script>
+    class BetpoolWidget {
+      constructor() {
+        this.userId = "9sfw5se0AW0ZyoUUvmwI";
+        this.accessToken = "guest-token";
+        this.betslipsData = [];
+        this.currentBetslipIndex = 0;
+        this.betslipsLimit = 6;
+        this.betslipsStatus = "WON";
+        // Translation definitions stored as property.
+        this.translations = {
+          overviewTitle: { en: "🎯 Betpool Overview", ka: "🎯 Betpool-ს მიმოხილვა", ru: "🎯 Обзор Бетпула", tr: "🎯 Betpool Genel Bakış" },
+          createSessionTitle: { en: "Create a Session", ka: "სესიის შექმნა", ru: "Создать сессию", tr: "Oturum Oluştur" },
+          createSessionDesc: { en: "Become a captain. Choose between Slots or Sportsbook and invite others to join your betting session.", ka: "გახდე კაპიტანი. აირჩიე Slots ან Sportsbook და მიიწვიე სხვები შენს ბეთის სესიაში.", ru: "Станьте капитаном. Выбирайте между Slots и Sportsbook и приглашайте других присоединиться к вашей сессии.", tr: "Kaptan olun. Slots veya Sportsbook arasından seçip diğerlerini bahis oturumunuza davet edin." },
+          createSessionBtn: { en: "Create Session", ka: "სესიის შექმნა", ru: "Создать сессию", tr: "Oturum Oluştur" },
+          joinSessionTitle: { en: "Join a Session", ka: "სესიაში გაუერთდი", ru: "Присоединиться к сессии", tr: "Oturuma Katıl" },
+          joinSessionDesc: { en: "Contribute money into an open session and let a captain play for everyone. Profits are split equally.", ka: "გაწევრე ფული გახსნილ სესიაში და დატოვე კაპიტანს ყველა vertreten.", ru: "Внесите деньги в открытую сессию и позвольте капитану играть за всех. Прибыль распределяется поровну.", tr: "Açık bir oturuma para katın ve kaptanın herkes için oynamasına izin verin. Kar eşit bölünür." },
+          joinSessionBtn: { en: "Browse Sessions", ka: "სესიების ნახვა", ru: "Просмотреть сессии", tr: "Oturumlara Gözat" },
+          captainProfileTitle: { en: "🧑 Captain Profile", ka: "კაპიტანის პროფილი", ru: "Профиль капитана", tr: "Kaptan Profili" },
+          liveSessionsTitle: { en: "📺 Live Sessions", ka: "ცხოვრალი სესიები", ru: "Живые сессии", tr: "Canlı Oturumlar" },
+          leaderboardTitle: { en: "📈 Top Captains Leaderboard", ka: "თოპ კაპიტანის ლიდერბორდი", ru: "Топ капитанов", tr: "En İyi Kaptanlar Lider Tablosu" },
+          betslipsTitle: { en: "🧾 Syndicate Betslips", ka: "სინდიკატის ბეთსლიპები", ru: "Бетслиты синдиката", tr: "Sendika Bahis Kuponları" },
+          openBtn: { en: "OPEN", ka: "ღია", ru: "Открыто", tr: "AÇIK" },
+          wonBtn: { en: "WON", ka: "მოგებული", ru: "Выиграл", tr: "KAZANDI" },
+          lostBtn: { en: "LOST", ka: "წაგებული", ru: "Проиграл", tr: "KAYBETTİ" },
+          modalCloseBtn: { en: "Close", ka: "დახურვა", ru: "Закрыть", tr: "Kapat" },
+          modalSessionName: { en: "", ka: "", ru: "", tr: "" },
+          modalSessionDetails: { en: "More session details coming soon...", ka: "მეტის სესიის დეტალები მალე", ru: "Подробнее о сессии скоро", tr: "Daha fazla oturum detayı yakında" },
+          modalCaptainLabel: { en: "Captain:", ka: "კაპიტანი:", ru: "Капитан:", tr: "Kaptan:" },
+          modalPoolLabel: { en: "Pool:", ka: "პული:", ru: "Пул:", tr: "Havuz:" },
+          modalMaxWinLabel: { en: "Max Win:", ka: "მაქსიმალური გამარჯვება:", ru: "Макс выигрыш:", tr: "Maksimum Kazanç:" },
+          modalTotalPoolLabel: { en: "Total Pool:", ka: "სულ პული:", ru: "Общий пул:", tr: "Toplam Havuz:" },
+          modalTotalResultLabel: { en: "Total Result:", ka: "სულ შედეგი:", ru: "Общий результат:", tr: "Toplam Sonuç:" },
+          modalFinishedLabel: { en: "Finished Sessions:", ka: "დასრულებული სესიები:", ru: "Завершённые сессии:", tr: "Bitmiş Oturumlar:" },
+          modalCaptainModalTitle: { en: "Captain Details", ka: "კაპიტანის დეტალები", ru: "Детали капитана", tr: "Kaptan Detayları" },
+          detailsBtn: { en: "Details", ka: "დეტალები", ru: "Детали", tr: "Detaylar" },
+          userLabel: { en: "User:", ka: "მომხმარებელი:", ru: "Пользователь:", tr: "Kullanıcı:" },
+          stakeLabel: { en: "Stake:", ka: "შევლ:", ru: "Ставка:", tr: "Bahis:" },
+          oddsLabel: { en: "Odds:", ka: "კოეფიციენტები:", ru: "Коэффициенты:", tr: "Oranlar:" },
+          possibleWinLabel: { en: "Possible Win:", ka: "შესაძლებელი გამარჯვება:", ru: "Возможный выигрыш:", tr: "Olası Kazanç:" },
+          loadMoreBtn: { en: "Load More", ka: "მეტი", ru: "Загрузить ещё", tr: "Daha Fazla Yükle" }
+        };
+      }
+
+      // Updates texts for all [translate-text] elements in the document.
+      applyTranslations() {
+        const lang = document.documentElement.lang || "en";
         document.querySelectorAll("[translate-text]").forEach((el) => {
           const key = el.getAttribute("translate-text");
-          if (window.translations[key]) {
-            el.textContent = window.translations[key][lang] || window.translations[key].en;
+          if (this.translations[key]) {
+            el.textContent = this.translations[key][lang] || this.translations[key].en;
           }
         });
-      });
-    </script>
+      }
 
-    <script>
-      class BetpoolWidget {
-        constructor() {
-          this.userId = "9sfw5se0AW0ZyoUUvmwI";
-          this.accessToken = "guest-token";
-          this.betslipsData = [];
-          this.currentBetslipIndex = 0;
-          this.betslipsLimit = 6;
-          this.betslipsStatus = "WON";
-        }
-
-        async init() {
-          try {
-            const auth = await extractAuthDataFromCookie();
-            if (auth && auth.accessToken) {
-              this.userId = auth.userId;
-              this.accessToken = auth.accessToken;
-            }
-          } catch (err) {
-            console.error("Failed to extract auth data; using default credentials", err);
+      async init() {
+        try {
+          const auth = await extractAuthDataFromCookie();
+          if (auth && auth.accessToken) {
+            this.userId = auth.userId;
+            this.accessToken = auth.accessToken;
           }
-          await this.loadCaptainProfile();
-          await this.loadLiveSessions();
-          await this.loadLeaderboard();
-          await this.loadBetslips();
-          this.defineModal();
+        } catch (err) {
+          console.error("Failed to extract auth data; using default credentials", err);
         }
+        // Apply translations once the widget is loaded.
+        this.applyTranslations();
+        await this.loadCaptainProfile();
+        await this.loadLiveSessions();
+        await this.loadLeaderboard();
+        await this.loadBetslips();
+        this.defineModal();
+      }
 
-        async fetchGraphQL(query) {
-          const response = await fetch("https://www.ambassadoribet.com/_internal/gql", {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-              Authorization: `Bearer ${this.accessToken}`,
-            },
-            body: JSON.stringify({ query }),
-          });
-          return response.json();
-        }
+      async fetchGraphQL(query) {
+        const response = await fetch("https://www.ambassadoribet.com/_internal/gql", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${this.accessToken}`,
+          },
+          body: JSON.stringify({ query }),
+        });
+        return response.json();
+      }
 
-        async loadCaptainProfile() {
-          const query = `
-              query GetSyndicateByUser {
-                syndicateConnection(brandId: "ab", userId: "${this.userId}") {
-                  edges {
-                    node {
-                      name
-                      imageRef
-                      stats {
-                        totalPoolAmount
-                        totalResultAmount
-                        numberOfFinishedSessions
-                        maxWinAmount
-                      }
+      async loadCaptainProfile() {
+        const query = `
+            query GetSyndicateByUser {
+              syndicateConnection(brandId: "ab", userId: "${this.userId}") {
+                edges {
+                  node {
+                    name
+                    imageRef
+                    stats {
+                      totalPoolAmount
+                      totalResultAmount
+                      numberOfFinishedSessions
+                      maxWinAmount
                     }
                   }
                 }
               }
-            `;
-          const { data } = await this.fetchGraphQL(query);
-          const profile = data?.syndicateConnection?.edges?.[0]?.node;
-          const container = document.getElementById("captain-profile");
-          if (!profile) {
-            container.innerHTML = "<p>No profile found.</p>";
-            return;
-          }
-          container.innerHTML = `
+            }`;
+        const { data } = await this.fetchGraphQL(query);
+        const profile = data?.syndicateConnection?.edges?.[0]?.node;
+        const container = document.getElementById("captain-profile");
+        if (!profile) {
+          container.innerHTML = "<p>No profile found.</p>";
+          return;
+        }
+        container.innerHTML = `
             <div class="bp-card">
               <div class="card-bg" style="background-image: url(${profile.imageRef});"></div>
               <img src="${profile.imageRef}" class="bp-captain-img" alt="${profile.name}" />
               <h3>${profile.name}</h3>
-              <p>${window.translations.modalMaxWinLabel.en} ₾${profile.stats.maxWinAmount}</p>
-              <p>${window.translations.modalFinishedLabel.en} ${profile.stats.numberOfFinishedSessions}</p>
+              <p>${this.translations.modalMaxWinLabel.en} ₾${profile.stats.maxWinAmount}</p>
+              <p>${this.translations.modalFinishedLabel.en} ${profile.stats.numberOfFinishedSessions}</p>
             </div>
           `;
-        }
+      }
 
-        async loadLiveSessions() {
-          const query = `
-              query LiveSessions {
-                syndicateSessionConnection(
-                  brandId: "ab"
-                  status: [PENDING, READY]
-                  visibility: PUBLIC
-                  first: 10
-                ) {
-                  edges {
-                    node {
-                      id
-                      syndicateSessionId
+      async loadLiveSessions() {
+        const query = `
+            query LiveSessions {
+              syndicateSessionConnection(
+                brandId: "ab"
+                status: [PENDING, READY]
+                visibility: PUBLIC
+                first: 10
+              ) {
+                edges {
+                  node {
+                    id
+                    syndicateSessionId
+                    name
+                    poolAmount
+                    syndicate {
                       name
-                      poolAmount
-                      syndicate {
-                        name
-                        slug
-                      }
+                      slug
                     }
                   }
                 }
               }
-            `;
-          const { data } = await this.fetchGraphQL(query);
-          const sessions = data?.syndicateSessionConnection?.edges || [];
-          const container = document.getElementById("live-sessions");
-          if (!sessions.length) {
-            container.innerHTML = "<p>No live sessions found.</p>";
-            return;
-          }
-          sessions.forEach(({ node }) => {
-            const card = document.createElement("div");
-            card.className = "bp-card";
-            card.innerHTML = `
+            }`;
+        const { data } = await this.fetchGraphQL(query);
+        const sessions = data?.syndicateSessionConnection?.edges || [];
+        const container = document.getElementById("live-sessions");
+        if (!sessions.length) {
+          container.innerHTML = "<p>No live sessions found.</p>";
+          return;
+        }
+        sessions.forEach(({ node }) => {
+          const card = document.createElement("div");
+          card.className = "bp-card";
+          card.innerHTML = `
               <div class="bp-session-type">Available</div>
               <h3>${node.name}</h3>
               <p>Captain: ${node.syndicate.name}</p>
               <p>Pool: ₾${node.poolAmount}</p>
               <button class="bp-btn" onclick="TMA.navigate('SYNDICATE_SESSION', {syndicateSlug: '${node.syndicate.slug}', syndicateSessionId: '${node.syndicateSessionId}'})">
-                ${window.translations.joinSessionBtn[document.documentElement.lang] || window.translations.joinSessionBtn.en}
+                ${this.translations.joinSessionBtn[document.documentElement.lang] || this.translations.joinSessionBtn.en}
               </button>
             `;
-            container.appendChild(card);
-          });
-        }
+          container.appendChild(card);
+        });
+      }
 
-        async loadLeaderboard() {
-          const query = `
-              query SyndicateConnection {
-                syndicateConnection(
-                  brandId: "ab"
-                  syndicateIds: [
-                    "d75347df2054c066af7cbdeecd82bc464b8882f3"
-                    "577c95750b9919ed15ab3c18b8f7ae1d5ffad0a7"
-                    "ef2338dd47ed9640e722deec1af0b52b1060b4f7"
-                    "564dfd815b8860d125c7ace5d57667a1db264c7a"
-                    "5e6b16ee187cab1d552afbc725aa15cecdf22cbe"
-                    "fcb426d245da0d0d312f594624c0c54a4ea3f965"
-                    "e1e4be1349a5a95d75b8279516ccabbc31847c5e"
-                  ]
-                ) {
-                  edges {
-                    node {
-                      name
-                      imageRef
-                      stats {
-                        maxWinAmount
-                        totalPoolAmount
-                        totalResultAmount
-                        numberOfFinishedSessions
-                      }
+      async loadLeaderboard() {
+        const query = `
+            query SyndicateConnection {
+              syndicateConnection(
+                brandId: "ab"
+                syndicateIds: [
+                  "d75347df2054c066af7cbdeecd82bc464b8882f3"
+                  "577c95750b9919ed15ab3c18b8f7ae1d5ffad0a7"
+                  "ef2338dd47ed9640e722deec1af0b52b1060b4f7"
+                  "564dfd815b8860d125c7ace5d57667a1db264c7a"
+                  "5e6b16ee187cab1d552afbc725aa15cecdf22cbe"
+                  "fcb426d245da0d0d312f594624c0c54a4ea3f965"
+                  "e1e4be1349a5a95d75b8279516ccabbc31847c5e"
+                ]
+              ) {
+                edges {
+                  node {
+                    name
+                    imageRef
+                    stats {
+                      maxWinAmount
+                      totalPoolAmount
+                      totalResultAmount
+                      numberOfFinishedSessions
                     }
                   }
                 }
               }
+            }`;
+        const { data } = await this.fetchGraphQL(query);
+        const container = document.getElementById("leaderboard");
+        const edges = data?.syndicateConnection?.edges || [];
+        if (!edges.length) {
+          container.innerHTML = "<p>No captains found.</p>";
+          return;
+        }
+        container.innerHTML = "";
+        const valid = edges
+          .filter(e => e.node.stats && e.node.stats.totalPoolAmount && e.node.stats.totalResultAmount)
+          .sort((a, b) => parseFloat(b.node.stats.maxWinAmount || 0) - parseFloat(a.node.stats.maxWinAmount || 0));
+        valid.forEach(({ node }) => {
+          const lang = document.documentElement.lang || "en";
+          const card = document.createElement("div");
+          card.className = "bp-card";
+          card.innerHTML = `
+              <img src="${node.imageRef}" class="bp-captain-img" alt="${node.name}" />
+              <h3>${node.name}</h3>
+              <p>${this.translations.modalMaxWinLabel[lang] || this.translations.modalMaxWinLabel.en} ₾${node.stats.maxWinAmount}</p>
+              <p>${this.translations.modalFinishedLabel[lang] || this.translations.modalFinishedLabel.en} ${node.stats.numberOfFinishedSessions}</p>
+              <div class="card-bg" style="background-image: url(${node.imageRef}); opacity: .08; background-attachment: scroll !important;"></div>
             `;
-          const { data } = await this.fetchGraphQL(query);
-          const container = document.getElementById("leaderboard");
-          const edges = data?.syndicateConnection?.edges || [];
-          if (!edges.length) {
-            container.innerHTML = "<p>No captains found.</p>";
+          const detailsBtn = document.createElement("button");
+          detailsBtn.className = "bp-btn";
+          detailsBtn.textContent = this.translations.detailsBtn[lang] || this.translations.detailsBtn.en;
+          detailsBtn.onclick = () => this.openCaptainModal(node.name, node.imageRef, node.stats);
+          card.appendChild(detailsBtn);
+          container.appendChild(card);
+        });
+      }
+
+      async loadBetslips(status = "WON", append = false) {
+        const container = document.getElementById("betslip-list");
+        const lang = document.documentElement.lang || "en";
+        if (!append || this.betslipsStatus !== status) {
+          this.betslipsStatus = status;
+          this.currentBetslipIndex = 0;
+          container.innerHTML = "<p>Loading...</p>";
+          try {
+            const res = await fetch(`https://api.samsara.ge/betslip?status=${status}`);
+            const json = await res.json();
+            this.betslipsData = json.flatMap(entry => entry?.data?.betslipConnection?.edges || []);
+          } catch (err) {
+            container.innerHTML = "<p>Error loading betslips.</p>";
+            console.error(err);
             return;
           }
           container.innerHTML = "";
-          const valid = edges
-            .filter(
-              (e) =>
-                e.node.stats &&
-                e.node.stats.totalPoolAmount &&
-                e.node.stats.totalResultAmount
-            )
-            .sort(
-              (a, b) =>
-                parseFloat(b.node.stats.maxWinAmount || 0) -
-                parseFloat(a.node.stats.maxWinAmount || 0)
-            );
-          valid.forEach(({ node }) => {
-            const lang = document.documentElement.lang || "en";
-            const card = document.createElement("div");
-            card.className = "bp-card";
-            card.innerHTML = `
-              <img src="${node.imageRef}" class="bp-captain-img" alt="${node.name}" />
-              <h3>${node.name}</h3>
-              <p>${window.translations.modalMaxWinLabel[lang] || window.translations.modalMaxWinLabel.en} ₾${node.stats.maxWinAmount}</p>
-              <p>${window.translations.modalFinishedLabel[lang] || window.translations.modalFinishedLabel.en} ${node.stats.numberOfFinishedSessions}</p>
-              <div class="card-bg" style="background-image: url(${node.imageRef}); opacity: .08; background-attachment: scroll !important;"></div>
-            `;
-            const detailsBtn = document.createElement("button");
-            detailsBtn.className = "bp-btn";
-            detailsBtn.textContent =
-              window.translations.detailsBtn[lang] || window.translations.detailsBtn.en;
-            detailsBtn.onclick = () =>
-              this.openCaptainModal(node.name, node.imageRef, node.stats);
-            card.appendChild(detailsBtn);
-            container.appendChild(card);
-          });
+          const existingBtn = document.getElementById("betslip-load-more");
+          if (existingBtn) { existingBtn.remove(); }
         }
-
-        async loadBetslips(status = "WON", append = false) {
-          const container = document.getElementById("betslip-list");
-          const lang = document.documentElement.lang || "en";
-          if (!append || this.betslipsStatus !== status) {
-            this.betslipsStatus = status;
-            this.currentBetslipIndex = 0;
-            container.innerHTML = "<p>Loading...</p>";
-            try {
-              const res = await fetch(`https://api.samsara.ge/betslip?status=${status}`);
-              const json = await res.json();
-              this.betslipsData = json.flatMap(
-                (entry) => entry?.data?.betslipConnection?.edges || []
-              );
-            } catch (err) {
-              container.innerHTML = "<p>Error loading betslips.</p>";
-              console.error(err);
-              return;
-            }
-            container.innerHTML = "";
-            const existingBtn = document.getElementById("betslip-load-more");
-            if (existingBtn) {
-              existingBtn.remove();
-            }
-          }
-          const start = this.currentBetslipIndex;
-          const end = start + this.betslipsLimit;
-          const slice = this.betslipsData.slice(start, end);
-          slice.forEach(({ node }) => {
-            const possibleWin = (parseFloat(node.stake) * parseFloat(node.odds)).toFixed(2);
-            const betslipCard = document.createElement("div");
-            betslipCard.className = "bp-card";
-            betslipCard.innerHTML = `
+        const start = this.currentBetslipIndex;
+        const end = start + this.betslipsLimit;
+        const slice = this.betslipsData.slice(start, end);
+        slice.forEach(({ node }) => {
+          const possibleWin = (parseFloat(node.stake) * parseFloat(node.odds)).toFixed(2);
+          const betslipCard = document.createElement("div");
+          betslipCard.className = "bp-card";
+          betslipCard.innerHTML = `
               <h3>Betslip - ${node.status}</h3>
-              <p><strong>${window.translations.userLabel[lang] || window.translations.userLabel.en}</strong> ${node.user.nickname}</p>
-              <p><strong>${window.translations.stakeLabel[lang] || window.translations.stakeLabel.en}</strong> ₾${node.stake}</p>
-              <p><strong>${window.translations.oddsLabel[lang] || window.translations.oddsLabel.en}</strong> ${node.odds}</p>
-              <p><strong>${window.translations.possibleWinLabel[lang] || window.translations.possibleWinLabel.en}</strong> ₾${possibleWin}</p>
+              <p><strong>${this.translations.userLabel[lang] || this.translations.userLabel.en}</strong> ${node.user.nickname}</p>
+              <p><strong>${this.translations.stakeLabel[lang] || this.translations.stakeLabel.en}</strong> ₾${node.stake}</p>
+              <p><strong>${this.translations.oddsLabel[lang] || this.translations.oddsLabel.en}</strong> ${node.odds}</p>
+              <p><strong>${this.translations.possibleWinLabel[lang] || this.translations.possibleWinLabel.en}</strong> ₾${possibleWin}</p>
               <ul style="font-size: 0.9rem; color: var(--bp-muted); padding-left: 1rem;">
                 ${node.events.map(event => {
-                  const outcomes = event.markets.flatMap(m => m.outcomes.map(o => o.name)).join(", ");
-                  return `<li><strong>${event.eventName}</strong>: ${outcomes}</li>`;
-                }).join("")}
+            const outcomes = event.markets.flatMap(m => m.outcomes.map(o => o.name)).join(", ");
+            return `<li><strong>${event.eventName}</strong>: ${outcomes}</li>`;
+          }).join("")}
               </ul>
             `;
-            container.appendChild(betslipCard);
-          });
-          this.currentBetslipIndex += this.betslipsLimit;
-          if (this.currentBetslipIndex < this.betslipsData.length) {
-            let loadMoreBtn = document.getElementById("betslip-load-more");
-            if (!loadMoreBtn) {
-              loadMoreBtn = document.createElement("button");
-              loadMoreBtn.id = "betslip-load-more";
-              loadMoreBtn.className = "bp-btn";
-              loadMoreBtn.textContent = window.translations.loadMoreBtn[lang] || window.translations.loadMoreBtn.en;
-              loadMoreBtn.onclick = () => {
-                this.loadBetslips(this.betslipsStatus, true);
-              };
-              container.insertAdjacentElement("afterend", loadMoreBtn);
-            }
-          } else {
-            const existingBtn = document.getElementById("betslip-load-more");
-            if (existingBtn) {
-              existingBtn.remove();
-            }
+          container.appendChild(betslipCard);
+        });
+        this.currentBetslipIndex += this.betslipsLimit;
+        if (this.currentBetslipIndex < this.betslipsData.length) {
+          let loadMoreBtn = document.getElementById("betslip-load-more");
+          if (!loadMoreBtn) {
+            loadMoreBtn = document.createElement("button");
+            loadMoreBtn.id = "betslip-load-more";
+            loadMoreBtn.className = "bp-btn";
+            loadMoreBtn.textContent = this.translations.loadMoreBtn[lang] || this.translations.loadMoreBtn.en;
+            loadMoreBtn.onclick = () => { this.loadBetslips(this.betslipsStatus, true); };
+            container.insertAdjacentElement("afterend", loadMoreBtn);
           }
-          if (this.betslipsData.length === 0 && !append) {
-            container.innerHTML = "<p>No betslips found.</p>";
-          }
+        } else {
+          const existingBtn = document.getElementById("betslip-load-more");
+          if (existingBtn) { existingBtn.remove(); }
         }
-
-        openSessionModal(id, name, captain, pool) {
-          const modal = document.getElementById("session-modal");
-          document.getElementById("modal-session-name").textContent = name;
-          document.getElementById("modal-session-captain").textContent = captain;
-          document.getElementById("modal-session-pool").textContent = `₾${pool}`;
-          modal.showModal();
+        if (this.betslipsData.length === 0 && !append) {
+          container.innerHTML = "<p>No betslips found.</p>";
         }
+      }
 
-        openCaptainModal(name, image, stats) {
-          document.getElementById("modal-captain-name").textContent = name;
-          document.getElementById("modal-captain-img").src = image;
-          document.getElementById("modal-max-win").textContent = stats.maxWinAmount;
-          document.getElementById("modal-total-pool").textContent = stats.totalPoolAmount;
-          document.getElementById("modal-total-result").textContent = stats.totalResultAmount;
-          document.getElementById("modal-finished").textContent = stats.numberOfFinishedSessions;
-          document.getElementById("captain-modal").showModal();
-        }
+      openSessionModal(id, name, captain, pool) {
+        const modal = document.getElementById("session-modal");
+        document.getElementById("modal-session-name").textContent = name;
+        document.getElementById("modal-session-captain").textContent = captain;
+        document.getElementById("modal-session-pool").textContent = `₾${pool}`;
+        modal.showModal();
+      }
 
-        defineModal() {
-          const html = `
+      openCaptainModal(name, image, stats) {
+        document.getElementById("modal-captain-name").textContent = name;
+        document.getElementById("modal-captain-img").src = image;
+        document.getElementById("modal-max-win").textContent = stats.maxWinAmount;
+        document.getElementById("modal-total-pool").textContent = stats.totalPoolAmount;
+        document.getElementById("modal-total-result").textContent = stats.totalResultAmount;
+        document.getElementById("modal-finished").textContent = stats.numberOfFinishedSessions;
+        document.getElementById("captain-modal").showModal();
+      }
+
+      defineModal() {
+        const html = `
             <dialog id="captain-modal" class="bp-dialog">
               <form method="dialog">
                 <img id="modal-captain-img" src="" alt="" class="bp-captain-img" />
@@ -690,17 +549,19 @@
               </form>
             </dialog>
           `;
-          document.body.insertAdjacentHTML("beforeend", html);
-          let lang = document.documentElement.lang || "en";
-          document.querySelectorAll("#captain-modal [translate-text]").forEach((el) => {
-            const key = el.getAttribute("translate-text");
-            el.textContent = window.translations[key][lang] || window.translations[key].en;
-          });
-        }
+        document.body.insertAdjacentHTML("beforeend", html);
+        // Immediately update texts of newly inserted captain modal.
+        const lang = document.documentElement.lang || "en";
+        document.querySelectorAll("#captain-modal [translate-text]").forEach(el => {
+          const key = el.getAttribute("translate-text");
+          el.textContent = this.translations[key][lang] || this.translations[key].en;
+        });
       }
+    }
 
-      const betpoolWidgetInstance = new BetpoolWidget();
-      betpoolWidgetInstance.init();
-    </script>
-  </body>
+    const betpoolWidgetInstance = new BetpoolWidget();
+    betpoolWidgetInstance.init();
+  </script>
+</body>
+
 </html>
